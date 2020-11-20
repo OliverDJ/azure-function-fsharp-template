@@ -1,0 +1,4 @@
+variables:
+  resourceGroup: insert
+  subscriptionId: insert
+  pathToArmParameters: '$(dropDir)\azure-resources\parameters\dev.json'

@@ -1,0 +1,18 @@
+variables:
+  repositoryName: 'insert-repo-name'
+  location: 'West Europe'
+  vmImage: 'windows-latest'
+
+  # Build
+  buildScriptPath: $(Build.Repository.LocalPath)\$(repositoryName)\build.cmd
+  buildOutput: '$(pathToSelf)\deploy\build\artifacts'
+  downloadPath: $(System.ArtifactsDirectory)
+  pathToSelf: '$(Build.Repository.LocalPath)\$(repositoryName)'
+  
+
+  # Deploy
+  agentFolder: '$(Agent.WorkFolder)\1'
+  dropDir: '$(agentFolder)\drop'
+  provisionDir: '$(dropDir)\provision'
+  pathToZip: '$(dropDir)\$(repositoryName).zip'
+  migrationSql: $(dropDir)\out.sql

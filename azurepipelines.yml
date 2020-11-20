@@ -1,0 +1,71 @@
+name: InsertProjectName
+
+
+trigger:
+  - master
+  - development
+
+# variables:
+#   - group: communal-resources
+#   - template: configuration\collective.yml
+#   - template: templates\variables\provision.yml@DevOpsArena
+#     parameters:
+#       provisionDir: $(provisionDir)
+    
+stages:
+  - stage: build_CI
+    displayName: Build    
+    jobs:
+      - job:
+        pool:
+          vmImage: $(vmImage)
+        steps:
+        - powershell: |
+            write-host "Hello build step from inline powershell"
+
+# -----------------------------------------------------------------------------------------
+# -                                  Deploy Development                                   -
+# -----------------------------------------------------------------------------------------
+  - stage: deploy_development
+    displayName: Deploy development
+    dependsOn: build_CI
+    condition: and(startsWith(variables['Build.SourceBranchName'], 'development'), succeeded('build_CI'))
+    
+    # variables:
+    # - template: configuration\test.yml
+    # - template: configuration\itest.yml
+    # - template: templates\variables\pluto\test.yml@DevOpsArena
+
+    jobs:
+    - deployment:
+      pool:
+        vmImage: $(vmImage)
+      environment: itest-env
+      strategy:
+        runOnce:
+          deploy:
+            steps:
+            - powershell: |
+                write-host "Hello deployment from inline powershell"
+
+
+# -----------------------------------------------------------------------------------------
+# -                                  Deploy MASTER                                        -
+# -----------------------------------------------------------------------------------------
+
+  - stage: deploy_stest
+    displayName: Deploy S-Test
+    dependsOn: build_CI
+    condition: and(startsWith(variables['Build.SourceBranchName'], 'master'), succeeded('build_CI'))
+
+    jobs:
+    - deployment:
+      pool:
+        vmImage: $(vmImage)
+      environment: stest-env
+      strategy:
+        runOnce:
+          deploy:
+            steps:
+            - powershell: |
+                write-host "Hello deployment from inline powershell"          

@@ -1,0 +1,12 @@
+**/bin/**
+**/obj/**
+**/.ionide/**
+**/.vs/**
+**/.metals/**
+
+**/.fake/**
+**/build/**
+*.user
+**/local.settings.json
+.fake
+.ionide
