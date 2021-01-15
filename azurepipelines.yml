@@ -1,6 +1,5 @@
 name: InsertProjectName
 
-
 trigger:
   - master
   - development
@@ -40,7 +39,7 @@ stages:
     - deployment:
       pool:
         vmImage: $(vmImage)
-      environment: itest-env
+      environment: dev-env
       strategy:
         runOnce:
           deploy:
@@ -53,8 +52,8 @@ stages:
 # -                                  Deploy MASTER                                        -
 # -----------------------------------------------------------------------------------------
 
-  - stage: deploy_stest
-    displayName: Deploy S-Test
+  - stage: deploy_master
+    displayName: Deploy Master
     dependsOn: build_CI
     condition: and(startsWith(variables['Build.SourceBranchName'], 'master'), succeeded('build_CI'))
 
@@ -62,7 +61,7 @@ stages:
     - deployment:
       pool:
         vmImage: $(vmImage)
-      environment: stest-env
+      environment: master-env
       strategy:
         runOnce:
           deploy:

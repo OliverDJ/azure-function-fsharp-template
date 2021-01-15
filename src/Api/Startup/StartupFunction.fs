@@ -14,6 +14,19 @@
         open Microsoft.IdentityModel.Logging
         open Microsoft.IdentityModel.Protocols
 
+        open Microsoft.Extensions.DependencyInjection
+        open Microsoft.Extensions.Configuration
+        open Microsoft.IdentityModel.Tokens
+        open Microsoft.IdentityModel.Protocols.OpenIdConnect
+        open Microsoft.IdentityModel.Logging
+        open Microsoft.IdentityModel.Protocols
+        open ServiceSetup
+        open Microsoft.Azure.WebJobs.Hosting
+        open AzureFunctionsDependencyInjectionExtensions.Config
+        open Microsoft.Azure.Functions.Extensions.DependencyInjection
+        open Microsoft.Extensions.DependencyInjection
+
+
         type HealthCheckSetupFunctionStartup () = 
             inherit FunctionsStartup() with  
                 override this.Configure (builder: IFunctionsHostBuilder ): unit =  

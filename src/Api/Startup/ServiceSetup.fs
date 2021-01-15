@@ -1,7 +1,7 @@
 ﻿namespace Api.Startup
 
     module ServiceSetup = 
-        0
+        
         open System
         open Microsoft.Extensions.DependencyInjection
         open Microsoft.Extensions.Configuration

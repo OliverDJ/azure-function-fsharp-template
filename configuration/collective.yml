@@ -1,5 +1,5 @@
 variables:
-  repositoryName: 'insert-repo-name'
+  repositoryName: 'azure-function-fsharp-template'
   location: 'West Europe'
   vmImage: 'windows-latest'
 
